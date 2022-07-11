@@ -3,7 +3,10 @@ import Login from '../../components/Login'
 
 function LoginPage() {
   return (
-      <Login/>
+    <div className='flex h-screen items-center justify-center w-screen'>
+            <Login/>
+
+    </div>
     )
 }
 
