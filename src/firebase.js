@@ -1,10 +1,10 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp, getApps, getApp } from "firebase/app";
-import {getFunctions} from 'firebase/functions'
+import { getFunctions } from 'firebase/functions'
 
 import { getAnalytics } from "firebase/analytics";
-import { getFirestore} from 'firebase/firestore'
-import {getAuth} from 'firebase/auth'
+import { getFirestore } from 'firebase/firestore'
+import { getAuth } from 'firebase/auth'
 import { getStorage, ref } from "firebase/storage";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -17,14 +17,14 @@ const firebaseConfig = {
   projectId: "pentagon-11200",
   storageBucket: "pentagon-11200.appspot.com",
   messagingSenderId: "596590493272",
-  appId: "1:596590493272:web:52fc21d2c11bfbc46c142d",
-  measurementId: "G-KTXD4SL09X"
+  appId: "1:596590493272:web:6d5fc53ec7b50b146c142d",
+  measurementId: "G-QQG40EM753"
 };
 
 // Initialize Firebase
-const app = !getApps().length ? initializeApp(firebaseConfig):getApp();
+const app = !getApps().length ? initializeApp(firebaseConfig) : getApp();
 const db = getFirestore(app)
-const auth =  getAuth(app)
+const auth = getAuth(app)
 const firebaseFunctions = getFunctions(app)
 
-export {app,db,auth,firebaseFunctions}
+export { app, db, auth, firebaseFunctions }

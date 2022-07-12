@@ -1,8 +1,12 @@
 import React from "react";
 import { Link, useNavigate } from 'react-router-dom'
-import { Button } from 'rsuite'
+import { Button, Avatar } from 'rsuite'
+import { GlobalContext } from "../../GlobalContext/GlobalContext";
+
 function Navbar() {
+  const { user } = React.useContext(GlobalContext)
   const navigate = useNavigate()
+  
   return (
     <nav class="bg-white shadow-md border-gray-200 px-2 sm:px-4 py-2.5 rounded dark:bg-gray-800">
       <div class="container flex flex-wrap justify-between items-center mx-auto">
@@ -19,15 +23,21 @@ function Navbar() {
           </a>
         </Link>
         <div class="flex md:order-2">
-          <Button
-        onClick={()=>{
-          navigate('/')
-        }}
-            type="primary"
-            class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3 md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-          >
-            LOGIN
-          </Button>
+          {user !== null
+            ?
+            <Avatar src={user.photoURL} />
+            :
+            <Button
+              onClick={() => {
+                navigate('/')
+              }}
+              type="primary"
+              class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3 md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+            >
+              LOGIN
+            </Button>
+          }
+
           <button
             data-collapse-toggle="mobile-menu-4"
             type="button"
