@@ -10,6 +10,7 @@ function EditProduct() {
     const [customerEmail, setCustomerEmail] = useState("")
     const [productDescription, setProductDescription] = useState("")
     const [status, setStatus] = useState("")
+    const [trackingId,setTrackingId] = useState("")
 
     React.useEffect(() => {
         setProductName(productDetails.productName)
@@ -18,12 +19,20 @@ function EditProduct() {
         setCustomerEmail(productDetails.customerEmail)
         setProductDescription(productDetails.productDescription)
         setStatus(productDetails.status)
+        setTrackingId(productDetails.productId)
     }, [productDetails])
 
     return (
         <div>
 
             <div>
+                <div className="my-5 mx-3">
+                    <label>Tracking ID</label>
+                    <Input
+                    // disabled
+                        value={trackingId}
+                         className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300" placeholder="Customer Email" />
+                </div>
                 <div className="my-5 mx-3">
                     <label>Product Name</label>
                     <Input

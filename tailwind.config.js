@@ -1,13 +1,50 @@
 /** @type {import('tailwindcss').Config} */
+const { fontFamily } = require(`tailwindcss/defaultTheme`)
+const colors = require('tailwindcss/colors')
+
 module.exports = {
   content: [
     "./src/**/*.{js,jsx,ts,tsx}",
     "./node_modules/flowbite/**/*.js"
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        sans: ['Fira Sans', ...fontFamily.sans],
+      },
+      screens: {
+        xs: '420px',
+        sm: '576px',
+        md: '768px',
+        lg: '992px',
+        xl: '1280px',
+        '2xl': '1440px',
+      },
+      typography: (theme) => ({
+        DEFAULT: {
+          css: {
+            a: {
+              color: theme('colors.current'),
+            },
+          },
+        },
+      }),
+    },
+    colors: {
+      inherit: 'inherit',
+      transparent: 'transparent',
+      current: 'currentColor',
+      black: '#000000',
+      white: '#ffffff',
+      gray: colors.slate,
+      primary: colors.indigo,
+      secondary: colors.rose,
+      tertiary: colors.emerald,
+    },
   },
   plugins: [
-    require('flowbite/plugin')
+    require('flowbite/plugin'),
+    require('@tailwindcss/forms'),
+    require('@tailwindcss/typography')
   ],
 }

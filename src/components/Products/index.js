@@ -55,7 +55,7 @@ function Products() {
                                 Customer Email
                             </th>
                             <th scope="col" class="px-6 py-3">
-                                Description
+                                Tracking ID
                             </th>
                             <th scope="col" class="px-6 py-3">
                                 Status
@@ -79,7 +79,7 @@ function Products() {
 
                                 </td>
                                 <td class="px-6 py-4">
-                                    {product?.productDescription}
+                                    {product?.productId}
                                 </td>
                                 <td class="px-6 py-4">
                                     {product?.status}

@@ -46,6 +46,17 @@ export default function GlobalContextProvider({ children }) {
                 console.log(error)
             })
     }
+    const trackProduct = async(trackingId)=>{
+        console.log("id",trackingId)
+        getDoc(doc(db, 'Products', trackingId))
+        .then(results=>{
+            setProductDetails(results.data())
+        })
+        .catch(error => {
+            console.log(error)
+        })
+
+    }
     const editProduct = async (newProduct) => {
         setLoading(true)
         updateDoc(doc(db, 'Products', productId), {
@@ -135,7 +146,8 @@ export default function GlobalContextProvider({ children }) {
                 setProductId,
                 productDetails,
                 setProductDetails,
-                getProductDetails
+                getProductDetails,
+                trackProduct
             }} >
             {children}
         </GlobalContext.Provider>
