@@ -1,11 +1,38 @@
 import React, { useState } from 'react'
 import Button from '../Button';
 import { Modal, Input, InputGroup, MaskedInput } from 'rsuite';
+import { getAuth } from 'firebase/auth'
+import { doc, collection, addDoc, updateDoc } from 'firebase/firestore'
+import { db } from '../../firebase';
+
 function Products() {
     const [open, setOpen] = useState(false)
+    const [productName, setProductName] = useState("")
+    const [customerName, setCustomerName] = useState("")
+    const [productLocation, setProductLocation] = useState("")
+    const [customerEmail, setCustomerEmail] = useState("")
+    const [productDescription, setProductDescription] = useState("")
+
     const handleClose = () => {
         setOpen(!open)
     }
+    const addProduct = async () => {
+        addDoc(collection(db, 'Products'), {
+            productName: productName,
+            customerName: customerName,
+            productLocation: productLocation,
+            customerEmail: customerEmail,
+            productDescription: productDescription,
+        })
+            .then(res => {
+                updateDoc(doc(db, 'Products', res.id), {
+                    productId: res.id,
+                })
+                alert("Product Added")
+            })
+    }
+
+
     const RenderModal = () => {
         return (
             <div className="modal-container">
@@ -14,11 +41,11 @@ function Products() {
                         <Modal.Title>Add Product</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        <Input className="my-5" placeholder="Customer Email" />
-                        <Input className="my-5" placeholder="Customer Name" />
-                        <Input className="my-5" placeholder="Product Name" />
-                        <Input className="my-5" placeholder="Product Location" />
-                        <Input as="textarea" placeholder="Product Description" rows={3} />
+                        <Input value={customerEmail} onChange={e => { setCustomerEmail(e.target.value); }} className="my-5" placeholder="Customer Email" />
+                        <Input value={customerName} onChange={e => { setCustomerName(e.target.value); }} className="my-5" placeholder="Customer Name" />
+                        <Input value={productName} onChange={e => { setProductName(e.target.value); }} className="my-5" placeholder="Product Name" />
+                        <Input value={productLocation} onChange={e => { setProductLocation(e.target.value); }} className="my-5" placeholder="Product Location" />
+                        <Input value={productDescription} onChange={e => { setProductDescription(e.target.value) }} as="textarea" placeholder="Product Description" rows={3} />
 
                     </Modal.Body>
                     <Modal.Footer>
@@ -59,7 +86,7 @@ function Products() {
                         </th>
                         <th scope="col" class="px-6 py-3">
                             Status
-                         </th>
+                        </th>
                         <th scope="col" class="px-6 py-3">
                             <span class="sr-only">Edit</span>
                         </th>
