@@ -13,6 +13,7 @@ function Products() {
     const [customerEmail, setCustomerEmail] = useState("")
     const [productDescription, setProductDescription] = useState("")
     const [status, setStatus] = useState("")
+    const [quantity,setQuantity] = useState(null)
 
     const handleClose = () => {
         setVisible(!visible)
@@ -112,11 +113,12 @@ function Products() {
                             }} className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300" placeholder="Customer Email" />
                     </div>
                     <div className="my-5 mx-3">
+                        <label>Quantity</label>
+                        <Input value={quantity} onChange={e => { setQuantity(e); }} className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300" placeholder="Quantity" />
+                    </div>
+                    <div className="my-5 mx-3">
                         <label>Customer Name</label>
-
                         <Input value={customerName} onChange={e => { setCustomerName(e); }} className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300" placeholder="Customer Name" />
-
-
                     </div>
                     <div className="my-5 mx-3">
                         <label>Customer Email</label>
@@ -150,7 +152,9 @@ function Products() {
                                     customerEmail: customerEmail,
                                     productLocation: productLocation,
                                     productDescription: productDescription,
-                                    status: status
+                                    status: status,
+                                    date: new Date(),
+                                    productQuantity: quantity
                                 })
                             }}
                         >{loading ? 'Submitting...' : 'Submit'}</Button>

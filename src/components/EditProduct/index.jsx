@@ -11,6 +11,8 @@ function EditProduct() {
     const [productDescription, setProductDescription] = useState("")
     const [status, setStatus] = useState("")
     const [trackingId,setTrackingId] = useState("")
+    const [quantity,setQuantity] = useState(null)
+
 
     React.useEffect(() => {
         setProductName(productDetails.productName)
@@ -20,6 +22,7 @@ function EditProduct() {
         setProductDescription(productDetails.productDescription)
         setStatus(productDetails.status)
         setTrackingId(productDetails.productId)
+        setQuantity(productDetails.productQuantity)
     }, [productDetails])
 
     return (
@@ -40,6 +43,14 @@ function EditProduct() {
                         onChange={e => {
                             setProductName(e)
                         }} className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300" placeholder="Customer Email" />
+                </div>
+                <div className="my-5 mx-3">
+                    <label>Quantity</label>
+                    <Input
+                        value={quantity}
+                        onChange={e => {
+                            setQuantity(e)
+                        }} className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300" placeholder="Product Quantity" />
                 </div>
                 <div className="my-5 mx-3">
                     <label>Customer Name</label>
@@ -80,7 +91,8 @@ function EditProduct() {
                                 customerEmail: customerEmail,
                                 productLocation: productLocation,
                                 productDescription: productDescription,
-                                status: status
+                                status: status,
+                                productQuantity: quantity,
                             })
                         }}
                     >{loading ? 'Updating...' : 'Update'}</Button>

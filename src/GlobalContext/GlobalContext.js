@@ -23,6 +23,8 @@ export default function GlobalContextProvider({ children }) {
     }, [user])
 
     const addProduct = async (newProduct) => {
+        const date = new Date()
+        const fullDate = date.getFullYear() + '/' + date.getMonth() + '/' + date.getDate()
         setLoading(true)
         addDoc(collection(db, 'Products'), {
             productName: newProduct.productName,
@@ -31,6 +33,8 @@ export default function GlobalContextProvider({ children }) {
             customerEmail: newProduct.customerEmail,
             productDescription: newProduct.productDescription,
             status: newProduct.status,
+            date: fullDate,
+            productQuantity: newProduct.productQuantity
         })
             .then(res => {
                 updateDoc(doc(db, 'Products', res.id), {
@@ -46,16 +50,15 @@ export default function GlobalContextProvider({ children }) {
                 console.log(error)
             })
     }
-    const trackProduct = async(trackingId)=>{
-        console.log("id",trackingId)
+    const trackProduct = async (trackingId) => {
+        console.log("id", trackingId)
         getDoc(doc(db, 'Products', trackingId))
-        .then(results=>{
-            setProductDetails(results.data())
-        })
-        .catch(error => {
-            console.log(error)
-        })
-
+            .then(results => {
+                setProductDetails(results.data())
+            })
+            .catch(error => {
+                console.log(error)
+            })
     }
     const editProduct = async (newProduct) => {
         setLoading(true)
